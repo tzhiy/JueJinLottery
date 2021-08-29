@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html {
+    font-size: 12px;
+    font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial;
+    word-break: break-word;
+    /* 浏览器在绘制文本时将着重考虑易读性，而不是渲染速度和几何精度. */
+    text-rendering: optimizeLegibility;
+    color: #333;
+    background-color: #f4f5f5;
+}
+
+li {
+    list-style: none
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+button {
+    cursor: pointer
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+a {
+    color: #4e5969;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #1d7dfa;
+}
+
+.hide,
+.none {
+    display: none
+}
+
+.clearfix:after {
+    visibility: hidden;
+    clear: both;
+    display: block;
+    content: ".";
+    height: 0
+}
+
+.clearfix {
+    *zoom: 1
+}
+
+.clickban {
+    pointer-events: none;
+}

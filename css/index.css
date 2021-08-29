@@ -1,0 +1,153 @@
+.lottery-container {
+    position: relative;
+    width: 946px;
+    height: inherit;
+    background: #568fff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.lottery-container .bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #2c68ff;
+}
+
+.title-box {
+    height: 196px;
+}
+
+.title-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    margin: 100px 0 0 254px;
+    width: 500px;
+}
+
+.main {
+    position: relative;
+    z-index: 9;
+    padding: 40px 32px 72px;
+}
+
+.title {
+    position: relative;
+    padding-left: 20px;
+    font-size: 20px;
+    line-height: 28px;
+    color: #fadd95;
+    margin: 0;
+}
+
+.title::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 8px;
+    height: 20px;
+    display: block;
+    border-radius: 50px;
+    background: #e37815;
+}
+
+.lottery-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    flex-direction: row;
+}
+
+.lottery-box .left-part {
+    width: 486px;
+    flex-shrink: 0;
+    margin-right: 32px;
+}
+
+.lottery-box .right-part {
+    width: 364px;
+    flex-shrink: 0;
+}
+
+.left-part-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.current_value {
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    margin: 0;
+}
+
+.value {
+    color: #fadd95;
+}
+
+.tosignin {
+    line-height: 40px;
+    padding: 0 24px;
+    background: rgba(255,215,147,.3);
+    border-radius: 50px;
+    font-size: 16px;
+    color: #ffd793;
+    transition: color .3s;
+}
+
+.tosignin:hover {
+    color: #c9cdd4;
+    cursor: pointer;
+}
+
+.lottery-title {
+    line-height: 40px;
+}
+
+.winning-list {
+    width: 100%;
+    /* height: 172px; */
+    height: 500px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    border-radius: 12px;
+    background: rgba(255,247,232,.3);
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.item {
+    padding-bottom: 8px;
+    display : flex;
+    font-size: 14px;
+    line-height: 22px;
+    color:#fff;
+}
+
+.message {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    word-break: break-all;flex: 1;
+    padding-right: 5px;
+    margin: 0;
+}
+
+.username {
+    color: #fadd95
+}
+
+.date {
+    color: #e8f3ff;
+    margin: 0;
+}

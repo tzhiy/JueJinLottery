@@ -1,0 +1,44 @@
+.view-cointainer {
+    position: absolute;
+}
+
+.main-header-box {
+    position: relative;
+    height: 5rem;
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5rem;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.main-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.sidebar {
+    position: fixed;
+    width: 230px;
+    top: 7rem;
+    bottom: 0;
+    background-color: #fff;
+    /* z-index: 2; */
+    margin-bottom: 24px;
+    border-radius: 2px;
+}
+
+.right-wrap {
+    margin: 24px 0 24px 254px;
+    width: calc(100% - 254px);
+    height: 880px;
+    position: relative;
+    z-index: 1;
+}
