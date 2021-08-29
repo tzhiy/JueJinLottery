@@ -1,12 +1,15 @@
 window.addEventListener('load', function () {
 
     // 抽奖数据信息
-    var mineral = 1000;
+    var mineral = 1200;
     var username = '掘金用户';
     // 奖品序列
-    prizeList = ['奖品1', '奖品2', '奖品3', '奖品4', '奖品5', '奖品6', '奖品7', '奖品8']
-    prizeImgList = ['images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp', 'images/prize/kuangshi.awebp',]
-    // 抽奖结果
+    prizeList = ['掘金限量桌垫', '随机限量徽章', '掘金新款T恤', '乐高海洋巨轮', 'Switch', 'Yoyo抱枕', '掘金马克杯', 'Bug']
+    // 奖品图片序列
+    prizeImgList = ['images/prize/1.awebp', 'images/prize/2.awebp', 'images/prize/3.awebp', 'images/prize/4.awebp', 'images/prize/5.awebp', 'images/prize/6.awebp', 'images/prize/7.awebp', 'images/prize/8.awebp']
+    // 奖品抽奖权重序列
+    prizeWeight = [30, 20, 20, 10, 5, 20, 20, 150]
+    // 抽奖结果（奖品序列的下标，从 0 开始）
     drawConclusionList = []
 
 
@@ -14,7 +17,7 @@ window.addEventListener('load', function () {
     class Init {
         constructor() {
             //转盘上顺时针展示奖品的序列号
-            this.showPrize = [0, 7, 6, 1, 5, 3, 2, 4]
+            this.showPrize = [0, 7, 6, 1, 5, 2, 3, 4]
             this.value = document.querySelector('.value');
             this.initGetMineral();
             this.initPrizeInfo();
@@ -65,13 +68,13 @@ window.addEventListener('load', function () {
         constructor() {
             // 抽到的奖品编号
             this.current_prizekey = -1;
+            this.content = document.querySelector('.content');
+            this.start = document.querySelector('.lottery-start');
             this.draw();
-            this.winning_list = document.querySelector('.winning-list');
         }
         // 点击抽奖
         draw() {
-            var start = document.querySelector('.lottery-start');
-            start.addEventListener('click', function () {
+            this.start.addEventListener('click', function () {
                 // 判断矿石是否足够
                 if (mineral < 200) {
                     alert('矿石不足');
@@ -81,23 +84,32 @@ window.addEventListener('load', function () {
                     init.showMineralNum();
                 }
                 // 点击开始后禁止再次点击
-                start.className = 'lottery-item lottery-start clickban'
+                this.start.className = 'lottery-item lottery-start clickban'
                 // 首先得到结果
                 this.drawConclusion();
                 // 添加结果到抽奖结果序列中
                 this.addDrawConclusion();
-                // 播放动画
+                // 播放动画后解除禁止点击效果
                 this.drawAnimation()
-                // 4 秒后解除禁止点击效果
-                setTimeout(function () {
-                    start.className = 'lottery-item lottery-start'
-                }, 4000)
             }.bind(this))
         }
         // 得出抽奖信息
         drawConclusion() {
-            // 返回 1 - 8 之间的随机整数
-            this.current_prizekey = Math.floor(Math.random() * 7);
+            let prizeWeightSum = 0;
+            for (var key in prizeWeight) {
+                prizeWeightSum += prizeWeight[key];
+            }
+            // 返回小于权重之和的随机正数
+            let random = Math.random() * prizeWeightSum;
+            // 得到抽奖结果
+            let preWeightSum = 0;
+            for (var key in prizeWeight) {
+                preWeightSum += prizeWeight[key];
+                if (random < preWeightSum) {
+                    this.current_prizekey = key;
+                    return;
+                }
+            }
         }
         // 添加结果到抽奖结果序列中
         addDrawConclusion() {
@@ -105,14 +117,14 @@ window.addEventListener('load', function () {
         }
         // 抽奖动画
         drawAnimation() {
-            //顺时针旋转的下标
+            // 顺时针旋转的下标
             var drawSequence = [0, 3, 5, 6, 7, 4, 2, 1];
             var turnable_items = document.querySelectorAll('.turnable-item');
-            //先清除选中效果
+            // 先清除选中效果
             for (let i = 0; i < 8; i++) {
                 turnable_items[i].className = 'turnable-item lottery-item';
             }
-            //旋转圈数，先转3圈，再转到指定奖品
+            // 旋转圈数，先转3圈，再转到指定奖品
             let flag = 3;
             let i = 0;
             turnable_items[drawSequence[i]].className = 'turnable-item lottery-item current-select';
@@ -124,8 +136,10 @@ window.addEventListener('load', function () {
                     flag--;
                 }
                 if (flag <= 0 && i == this.current_prizekey) {
-                    //动画结束后显示抽奖信息
+                    // 动画结束后显示抽奖信息
                     this.showDrawInfo()
+                    // 解除鼠标禁止点击开始抽奖的效果
+                    this.start.className = 'lottery-item lottery-start'
                     clearInterval(timer);
                 }
                 turnable_items[drawSequence[i]].className = 'turnable-item lottery-item current-select';
@@ -135,11 +149,30 @@ window.addEventListener('load', function () {
         showDrawInfo(current_prizekey) {
             var winning_item = document.createElement('div');
             winning_item.className = 'item';
-            winning_item.innerHTML = '<p class="message">🎉 恭喜<span class="username"> ' + username + ' </span>抽中' + prizeList[this.current_prizekey] + '</p><p class="date">2021-8-28</p>'
-            this.winning_list.appendChild(winning_item);
+            winning_item.innerHTML = '<p class="message">🎉 恭喜<span class="username"> ' + username + ' </span>抽中' + prizeList[this.current_prizekey] + '</p><p class="date">' + this.getCurrentDate() + '</p>'
+            this.content.appendChild(winning_item);
+            // 信息大于 5 条时显示滚动效果
+            if (this.content.children.length > 5) {
+                // 向上平移
+                this.content.style.transform = 'translateY(-30px)'
+                this.content.style.transition = '1s ease-in'
+                setTimeout(function () {
+                    // 平移完成后首先删掉第一个子节点
+                    this.content.removeChild(this.content.children[0])
+                    // 再立即将位置复原
+                    this.content.style.transition = '0s'
+                    this.content.style.transform = 'translateY(0)'
+                }.bind(this), 1000)
+            }
+        }
+        getCurrentDate() {
+            let date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            return year + '-' + month + '-' + day;
         }
     }
-
 
     var init = new Init();
     var prize = new Prize();

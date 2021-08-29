@@ -2,4 +2,4 @@
 
 模拟掘金的抽奖界面
 
-![demo](demo.gif)
+![demo](demo/demo.gif)
