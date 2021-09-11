@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
     // 奖品序列
     prizeList = ['掘金限量桌垫', '随机限量徽章', '掘金新款T恤', '乐高海洋巨轮', 'Switch', 'Yoyo抱枕', '掘金马克杯', 'Bug']
     // 奖品图片序列
-    prizeImgList = ['images/prize/1.awebp', 'images/prize/2.awebp', 'images/prize/3.awebp', 'images/prize/4.awebp', 'images/prize/5.awebp', 'images/prize/6.awebp', 'images/prize/7.awebp', 'images/prize/8.awebp']
+    prizeImgList = ['1.awebp', '2.awebp', '3.awebp', '4.awebp', '5.awebp', '6.awebp', '7.awebp', '8.awebp']
     // 奖品抽奖权重序列
     prizeWeight = [30, 20, 20, 10, 5, 20, 20, 150]
     // 抽奖结果（奖品序列的下标，从 0 开始）
@@ -54,7 +54,8 @@ window.addEventListener('load', function () {
                 var text = document.createElement('div');
                 text.className = 'text';
                 //填入图片和文字信息
-                img.src = prizeImgList[this.showPrize[i]];
+                img.src = 'prize/' + prizeImgList[this.showPrize[i]];
+                console.log(img.src)
                 text.innerHTML = prizeList[this.showPrize[i]];
                 //添加节点
                 turnable_items[i].appendChild(image);
