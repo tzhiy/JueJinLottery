@@ -55,7 +55,6 @@ window.addEventListener('load', function () {
                 text.className = 'text';
                 //填入图片和文字信息
                 img.src = 'prize/' + prizeImgList[this.showPrize[i]];
-                console.log(img.src)
                 text.innerHTML = prizeList[this.showPrize[i]];
                 //添加节点
                 turnable_items[i].appendChild(image);
